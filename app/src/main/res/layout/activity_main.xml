@@ -52,6 +52,7 @@
                 android:textSize="18sp" />
 
             <EditText
+                android:id="@+id/yourFP"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -72,6 +73,7 @@
                 android:textSize="18sp" />
 
             <EditText
+                android:id="@+id/compFP"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -92,6 +94,7 @@
                 android:textSize="18sp" />
 
             <EditText
+                android:id="@+id/totalFP"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -112,6 +115,7 @@
                 android:textSize="18sp" />
 
             <EditText
+                android:id="@+id/currentFP"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -132,6 +136,7 @@
                 android:textSize="18sp" />
 
             <EditText
+                android:id="@+id/rewardFP"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -152,6 +157,7 @@
                 android:textSize="18sp" />
 
             <EditText
+                android:id="@+id/arcbonus"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -173,6 +179,7 @@
                 android:textSize="18sp" />
 
             <EditText
+                android:id="@+id/requiredFP"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -193,6 +200,7 @@
                 android:textSize="18sp" />
 
             <EditText
+                android:id="@+id/profit"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -233,6 +241,7 @@
             android:layout_height="wrap_content">
 
             <Button
+                android:id="@+id/calculate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/btn_calculate" />
