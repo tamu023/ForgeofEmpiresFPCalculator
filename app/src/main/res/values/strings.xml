@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Forge of Empires FP Calculator</string>
+    <string name="btn_calculate">Calculate</string>
+    <string name="txt_yourFP">Your FP</string>
+    <string name="txt_compFP">Competitor FP</string>
+    <string name="txt_buildingFP">Building Total FP</string>
+    <string name="txt_currFP">Building Current FP</string>
+    <string name="txt_reward">FP Reward</string>
+    <string name="txt_arc">Arc bonus percentage</string>
+    <string name="txt_detail">Details</string>
+    <string name="txt_FP">Forge Points</string>
+    <string name="edt_archint">0% to 100%</string>
+    <string name="txt_reqFP">Required FP</string>
+    <string name="txt_profit">Profit</string>
+    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+</resources>

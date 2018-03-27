@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "215279895705",
+    "firebase_url": "https://forgeofempiresfpcalculator.firebaseio.com",
+    "project_id": "forgeofempiresfpcalculator",
+    "storage_bucket": "forgeofempiresfpcalculator.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:215279895705:android:3d129b9161ad3540",
+        "android_client_info": {
+          "package_name": "com.example.bloodline.forgeofempiresfpcalculator"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "215279895705-sdddkfsjkp58533pc3h8lr9fsa13deji.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bloodline.forgeofempiresfpcalculator",
+            "certificate_hash": "90c5f9b82334700f3a1a3847e1253f445ebf8f86"
+          }
+        },
+        {
+          "client_id": "215279895705-374438rdjqok50r661ru5ujhpspqn17v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD84iDhWskfpmo0_g5rCznidyCxmOmWJUw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "215279895705-374438rdjqok50r661ru5ujhpspqn17v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
