@@ -13,4 +13,8 @@
     <string name="txt_reqFP">Required FP</string>
     <string name="txt_profit">Profit</string>
     <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="rdb_profit">Profit Calculate</string>
+    <string name="rdb_reward">Reward win</string>
+    <string name="txt_goldammount">Gold Amount</string>
+    <string name="txt_fpprice">FP Curr price</string>
 </resources>

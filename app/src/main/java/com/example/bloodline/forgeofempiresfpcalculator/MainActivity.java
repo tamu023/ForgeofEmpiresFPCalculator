@@ -11,6 +11,9 @@ import com.google.android.gms.ads.AdView;
 
 public class MainActivity extends AppCompatActivity {
 
+    //TODO radiobutton készítése két lehetőséggel, egyik nyeremény biztosítása, másik profit megadásával mikor kell és mennyi belerakni hogy a megadott profitot el lehessen érni
+    //TODO kalkláció a reklám alá, jelenlegi arany bemeneti paraméterrel és jelenlegi fp árával, hogy mennyi fpt tud még a felhasználó venni
+
     private static final String TAG = "MainActivity";
     private AdView mAdView;
     //Double variables
@@ -46,12 +49,29 @@ public class MainActivity extends AppCompatActivity {
         //on screen items define
         define_items();
 
+
         btnCalculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //put parameters to double variable
+                pull_params();
+                //check parameters
+                check_params();
             }
         });
+    }
+
+    private void check_params() {
+
+    }
+
+    private void pull_params() {
+        dblyourFP = Double.parseDouble(edtyourFP.toString());
+        dblcompFP = Double.parseDouble(edtcompFP.toString());
+        dblbuildingFP = Double.parseDouble(edtbuildingFP.toString());
+        dblcurrentFP = Double.parseDouble(edtcurrentFP.toString());
+        dblrewardFP = Double.parseDouble(edtrewardFP.toString());
+        dblarcbonus = Double.parseDouble(edtarcbonus.toString());
     }
 
     private void define_items() {
