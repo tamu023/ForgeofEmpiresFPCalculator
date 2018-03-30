@@ -1,12 +1,16 @@
 package com.example.bloodline.forgeofempiresfpcalculator;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Toast;
 
-import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
 public class MainActivity extends AppCompatActivity {
@@ -39,15 +43,23 @@ public class MainActivity extends AppCompatActivity {
     //Buttons
     private Button btnCalculate;
 
+    //Radiobuttons
+    private RadioGroup rdbgrp1;
+    private RadioButton rdbprofit;
+    private RadioButton rdbreward;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        //AdRequest adRequest = new AdRequest.Builder().build();
+        //mAdView.loadAd(adRequest);
         //on screen items define
         define_items();
+
+        //on startup edittext wont be focused
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
 
         btnCalculate.setOnClickListener(new View.OnClickListener() {
@@ -56,22 +68,71 @@ public class MainActivity extends AppCompatActivity {
                 //put parameters to double variable
                 pull_params();
                 //check parameters
-                check_params();
+                if (check_params()) {
+                    if (rdbreward.isChecked()) {
+                        calculate_reqFP();
+                        calculate_profit();
+                    } else if (rdbprofit.isChecked()) {
+
+                    }
+                } else {
+                    Toast.makeText(MainActivity.this, "Check input parameters!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        rdbgrp1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (rdbreward.isChecked()) {
+                    edtcurrentFP.setEnabled(true);
+                    edtprofit.setEnabled(false);
+                    edtrequiredFP.setEnabled(false);
+                } else if (rdbprofit.isChecked()) {
+                    edtcurrentFP.setEnabled(false);
+                    edtprofit.setEnabled(true);
+                }
             }
         });
     }
 
-    private void check_params() {
+    private void calculate_profit() {
+        dblprofit = Math.ceil(dblrewardFP * dblarcbonus) - dblrequiredFP - dblyourFP;
+        edtprofit.setText(String.valueOf(dblprofit));
+    }
 
+    private void calculate_reqFP() {
+        dblrequiredFP = Math.ceil((dblbuildingFP - ((dblcompFP - dblyourFP) + dblcurrentFP)) / 2 + (dblcompFP - dblyourFP));
+        edtrequiredFP.setText(String.valueOf(dblrequiredFP));
+    }
+
+
+    private boolean check_params() {
+        if (dblarcbonus == 0 || dblarcbonus > 100) {
+            edtarcbonus.setBackgroundColor(Color.RED);
+            return false;
+        } else {
+            edtarcbonus.setBackgroundColor(Color.GREEN);
+        }
+
+        if (dblyourFP + dblcompFP >= dblbuildingFP || dblyourFP >= dblbuildingFP || dblcompFP >= dblbuildingFP) {
+            edtyourFP.setBackgroundColor(Color.RED);
+            edtcompFP.setBackgroundColor(Color.RED);
+            return false;
+        } else {
+            edtyourFP.setBackgroundColor(Color.GREEN);
+            edtcompFP.setBackgroundColor(Color.GREEN);
+        }
+        return true;
     }
 
     private void pull_params() {
-        dblyourFP = Double.parseDouble(edtyourFP.toString());
-        dblcompFP = Double.parseDouble(edtcompFP.toString());
-        dblbuildingFP = Double.parseDouble(edtbuildingFP.toString());
-        dblcurrentFP = Double.parseDouble(edtcurrentFP.toString());
-        dblrewardFP = Double.parseDouble(edtrewardFP.toString());
-        dblarcbonus = Double.parseDouble(edtarcbonus.toString());
+        dblyourFP = Double.parseDouble(edtyourFP.getText().toString());
+        dblcompFP = Double.parseDouble(edtcompFP.getText().toString());
+        dblbuildingFP = Double.parseDouble(edtbuildingFP.getText().toString());
+        dblcurrentFP = Double.parseDouble(edtcurrentFP.getText().toString());
+        dblrewardFP = Double.parseDouble(edtrewardFP.getText().toString());
+        dblarcbonus = Double.parseDouble(edtarcbonus.getText().toString());
     }
 
     private void define_items() {
@@ -85,5 +146,23 @@ public class MainActivity extends AppCompatActivity {
         edtprofit = (EditText) findViewById(R.id.profit);
         btnCalculate = (Button) findViewById(R.id.calculate);
         mAdView = (AdView) findViewById(R.id.adView);
+        rdbprofit = (RadioButton) findViewById(R.id.rdbprofit);
+        rdbreward = (RadioButton) findViewById(R.id.rdbreward);
+        rdbgrp1 = (RadioGroup) findViewById(R.id.rdbgrp1);
+        edtcurrentFP.setEnabled(true);
+        edtprofit.setEnabled(false);
+        edtrequiredFP.setEnabled(false);
+    }
+
+    private void clear_items() {
+        edtyourFP.setText(null);
+        edtcompFP.setText(null);
+        edtbuildingFP.setText(null);
+        edtcurrentFP.setText(null);
+        edtrewardFP.setText(null);
+        edtarcbonus.setText(null);
+        edtrequiredFP.setText(null);
+        edtprofit.setText(null);
+
     }
 }
