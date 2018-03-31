@@ -17,4 +17,5 @@
     <string name="rdb_reward">Reward win</string>
     <string name="txt_goldammount">Gold Amount</string>
     <string name="txt_fpprice">FP Curr price</string>
+    <string name="edt_goldhint">Required Gold</string>
 </resources>
