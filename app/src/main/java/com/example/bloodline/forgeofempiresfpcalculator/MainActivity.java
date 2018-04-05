@@ -52,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
     private RadioGroup rdbgrp1;
     private RadioButton rdbprofit;
     private RadioButton rdbreward;
+    private RadioGroup rdbgrp2;
+    private RadioButton rdbfpcalc;
+    private RadioButton rdbgoldreq;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,11 +98,19 @@ public class MainActivity extends AppCompatActivity {
         btnCalculate2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!edtfpcurrprice.getText().toString().matches("") && !edtgoldamount.getText().toString().matches("")) {
-                    double dblcurrprice = Double.parseDouble(edtfpcurrprice.getText().toString());
-                    double dblgoldamount = Double.parseDouble(edtgoldamount.getText().toString());
-                    double dblbuyablefp = calculate_buyablefp(dblcurrprice, dblgoldamount);
+                double dblcurrprice;
+                double dblgoldamount;
+                double dblbuyablefp;
+                if (rdbfpcalc.isChecked() && !edtfpcurrprice.getText().toString().isEmpty() && !edtgoldamount.getText().toString().isEmpty()) {
+                    dblcurrprice = Double.parseDouble(edtfpcurrprice.getText().toString());
+                    dblgoldamount = Double.parseDouble(edtgoldamount.getText().toString());
+                    dblbuyablefp = calculate_buyablefp(dblcurrprice, dblgoldamount);
                     edtbuyableFP.setText(String.valueOf(dblbuyablefp));
+                } else if (rdbgoldreq.isChecked() && !edtfpcurrprice.getText().toString().isEmpty() && !edtbuyableFP.getText().toString().isEmpty()) {
+                    dblcurrprice = Double.parseDouble(edtfpcurrprice.getText().toString());
+                    dblbuyablefp = Double.parseDouble(edtbuyableFP.getText().toString());
+                    dblgoldamount = calculate_goldammount(dblcurrprice, dblbuyablefp);
+                    edtgoldamount.setText(String.valueOf(dblgoldamount));
                 }
             }
         });
@@ -119,6 +130,30 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        rdbgrp2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if (rdbfpcalc.isChecked()) {
+                    edtgoldamount.setEnabled(true);
+                    edtbuyableFP.setEnabled(false);
+                } else if (rdbgoldreq.isChecked()) {
+                    edtgoldamount.setEnabled(false);
+                    edtbuyableFP.setEnabled(true);
+                }
+            }
+        });
+    }
+
+    private double calculate_goldammount(double currprice, double buyablefp) {
+        double ammount = 0;
+        buyablefp = Math.round(buyablefp);
+        while (buyablefp > 0) {
+            ammount = ammount + currprice;
+            currprice += 50;
+            buyablefp--;
+        }
+        return ammount;
     }
 
     private double calculate_buyablefp(double currprice, double goldamount) {
@@ -140,11 +175,11 @@ public class MainActivity extends AppCompatActivity {
         fill_empty(edtcurrentFP, "0");
         fill_empty(edtarcbonus, "1");
 
-        if (edtbuildingFP.getText().toString().matches("")) {
+        if (edtbuildingFP.getText().toString().isEmpty()) {
             edtbuildingFP.setBackgroundColor(Color.RED);
             seged = false;
         }
-        if (edtrewardFP.getText().toString().matches("")) {
+        if (edtrewardFP.getText().toString().isEmpty()) {
             edtrewardFP.setBackgroundColor(Color.RED);
             seged = false;
         }
@@ -191,7 +226,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void fill_empty(EditText edt, String value) {
-        if (edt.getText().toString().matches("")) {
+        if (edt.getText().toString().isEmpty()) {
             edt.setText(value);
         }
     }
@@ -224,9 +259,15 @@ public class MainActivity extends AppCompatActivity {
         rdbprofit = findViewById(R.id.rdbprofit);
         rdbreward = findViewById(R.id.rdbreward);
         rdbgrp1 = findViewById(R.id.rdbgrp1);
+        rdbfpcalc = findViewById(R.id.rdbfpcalc);
+        rdbgoldreq = findViewById(R.id.rdbgoldreq);
+        rdbgrp2 = findViewById(R.id.rdbgrp2);
         edtcurrentFP.setEnabled(true);
         edtprofit.setEnabled(false);
         edtrequiredFP.setEnabled(false);
+        edtgoldamount.setEnabled(true);
+        edtfpcurrprice.setEnabled(true);
+        edtbuyableFP.setEnabled(false);
     }
 
     private void clear_items() {
@@ -238,5 +279,8 @@ public class MainActivity extends AppCompatActivity {
         edtarcbonus.setText(null);
         edtrequiredFP.setText(null);
         edtprofit.setText(null);
+        edtgoldamount.setText(null);
+        edtbuyableFP.setText(null);
+        edtfpcurrprice.setText(null);
     }
 }
